@@ -11,7 +11,8 @@ jobs:
     steps:
       - name: 'Produce `output1`.'
         id: step1
-        run: echo "::set-output name=value::hello"
+        run: |
+          echo 'value="still hello"' >> $GITHUB_OUTPUT
   job2:
     needs: job1
     runs-on: ubuntu-latest
