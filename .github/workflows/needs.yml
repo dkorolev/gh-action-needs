@@ -1,0 +1,20 @@
+name: 'Testing `needs.`'
+
+on:
+  workflow_dispatch:
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.step1.outputs.value }}
+    steps:
+      - name: 'Produce `output1`.'
+        id: step1
+        run: echo "::set-output name=value::hello"
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Get `output`.'
+        run: echo "The output was ${{ needs.job1.outputs.output1 }}"
